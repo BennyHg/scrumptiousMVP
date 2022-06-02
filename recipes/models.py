@@ -22,6 +22,7 @@ class Step(models.Model):
     recipe = models.ForeignKey(
         "Recipe", related_name="steps", on_delete=models.CASCADE
     )
+    food_items = models.ManyToManyField("FoodItem", null=True, blank=True)
 
     def __str__(self):
         return str(self.order) + " of " + str(self.directions)
