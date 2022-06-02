@@ -24,7 +24,7 @@ class Step(models.Model):
     )
 
     def __str__(self):
-        return str(self.order) + " of " + str(self.recipe)
+        return str(self.order) + " of " + str(self.directions)
 
 
 class Measure(models.Model):
