@@ -23,13 +23,16 @@ class Step(models.Model):
         "Recipe", related_name="steps", on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return str(self.order) + " of " + str(self.recipe)
+
 
 class Measure(models.Model):
     name = models.CharField(max_length=30, unique=True)
     abbreviation = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.abbreviation
 
 
 class FoodItem(models.Model):
@@ -40,7 +43,6 @@ class FoodItem(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=100)
     amount = models.FloatField()
     recipe = models.ForeignKey(
         "Recipe", related_name="ingredients", on_delete=models.CASCADE
@@ -53,4 +55,4 @@ class Ingredient(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return str(self.amount) + " of " + str(self.food)
