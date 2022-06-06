@@ -23,8 +23,10 @@ class IngredientAdmin(admin.ModelAdmin):
 class StepAdmin(admin.ModelAdmin):
     pass
 
+
 class RatingAdmin(admin.ModelAdmin):
     pass
+
 
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Measure, MeasureAdmin)
