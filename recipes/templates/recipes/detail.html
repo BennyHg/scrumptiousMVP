@@ -37,6 +37,11 @@
       Created on {{ recipe.created }} |
       Updated on {{ recipe.updated }}
     </p>
+    <form method="post" action="{% url 'recipe_rating' recipe.id %}">
+      {% csrf_token %}
+      {{ rating_form.as_p }}
+      <button class="button">Rate</button>     
+    </form>
     <p>Tags: {% for tag in recipe.tags.all %}{{ tag.word }} {% endfor %}</p>
     <p>{{ recipe.description | markdownify }}</p>
     <h2>Ingredients</h2>
@@ -63,6 +68,7 @@
         <li>{{ step.directions }}</li>
       {% endfor %}
     </ol>
+    <p><a href="{% url 'recipe_edit' recipe.id %}">Edit Recipe</a></p>
   </main>
 </body>
 

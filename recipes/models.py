@@ -30,7 +30,9 @@ class FoodItem(models.Model):
 
 
 class Ingredient(models.Model):
-    amount = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(20)])
+    amount = models.FloatField(
+        validators=[MinValueValidator(0), MaxValueValidator(20)]
+    )
     recipe = models.ForeignKey(
         "Recipe",
         related_name="ingredients",
@@ -55,3 +57,12 @@ class Step(models.Model):
 
     def __str__(self):
         return str(self.order) + ". " + self.directions
+
+
+class Rating(models.Model):
+    value = models.PositiveSmallIntegerField(
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
+    )
+    recipe = models.ForeignKey(
+        "Recipe", related_name="ratings", on_delete=models.CASCADE,
+    )
