@@ -37,7 +37,7 @@
       Created on {{ recipe.created }} |
       Updated on {{ recipe.updated }}
     </p>
-    <form method="post" action="{% url 'recipe_rating' recipe.id %}">
+    <form method="POST" action="{% url 'recipe_rating' recipe.id %}">
       {% csrf_token %}
       {{ rating_form.as_p }}
       <button class="button">Rate</button>
