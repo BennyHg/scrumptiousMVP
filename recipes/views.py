@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from recipes.forms import RatingForm
@@ -47,15 +48,17 @@ def change_recipe(request, pk):
 
 class RecipeListView(ListView):
     model = Recipe
+    template_name = "recipes/list.html"
+
+
+class RecipeDetailView(DetailView):
+    model = Recipe
     template_name = "recipes/detail.html"
 
-
-def show_recipe(request, pk):
-    context = {
-        "recipe": Recipe.objects.get(pk=pk) if Recipe else None,
-        "rating_form": RatingForm(),  # highlight
-    }
-    return render(request, "recipes/detail.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["rating_form"] = RatingForm()
+        return context
 
 
 def log_rating(request, recipe_id):
